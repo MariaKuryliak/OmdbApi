@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .result{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+       
+    </style>
+</head>
+<body>
+    <div style="width: 100%; display: inline;position: fixed;">
+        <input type="text" placeholder="Write movie name" style="width:45%;height: 30px;">
+        <button onclick="getValue()" style="width:45%;background-color: green;color: white;height: 38px;">search </button>
+    </div>
+      <div id="result" style="width: 100%;"></div>
+      
+      <div class="result">
+      
+      </div>
+
+      
+
+      <script>
+            const button = document.querySelector('button')
+
+            async function getValue() {
+                const input = document.querySelector('input')
+                const finish = document.querySelector('.result') 
+                //const imgOne = document.querySelector('.card-img-top')
+                let url = `https://www.omdbapi.com/?apikey=c286dd4c&s=${input.value}`;
+                
+                let response = await fetch(url);
+
+                let {Search} = await response.json();
+            
+            Search.forEach(el => {
+                finish.innerHTML = finish.innerHTML + `<p><img src="${el.Poster}"></p>`
+                
+            })
+        }
+      </script>
+</body>
+</html>
